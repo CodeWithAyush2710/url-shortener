@@ -8,6 +8,6 @@ public class UrlShortenerBackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(UrlShortenerBackendApplication.class, args);
-		System.out.println("Server started at 1001");
+		System.out.println("Server started");
 	}
 }
