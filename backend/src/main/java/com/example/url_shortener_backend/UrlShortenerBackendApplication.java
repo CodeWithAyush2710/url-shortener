@@ -8,6 +8,6 @@ public class UrlShortenerBackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(UrlShortenerBackendApplication.class, args);
-		System.out.println("Server started");
+		System.out.println("Server started at 8080");
 	}
 }

@@ -3,6 +3,7 @@ package com.example.url_shortener_backend.Entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -19,14 +20,7 @@ public class Shortner {
 
     private String user_url;
 
-    @Column(unique = true)
-    private Integer generated_integer;
+    private LocalDate created_at;
 
-    private String converted_62;
-
-    private String generated_link;
-
-    private Date created_at;
-
-    private Date expiry_at;
+    private LocalDate expiry_at;
 }
