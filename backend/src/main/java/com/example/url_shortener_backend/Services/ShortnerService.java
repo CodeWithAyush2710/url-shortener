@@ -24,7 +24,7 @@ public class ShortnerService {
     }
 
     public Short_with_base getShortner(String str){
-        Shortner shortner = shortnerRepository.save(new Shortner(null,str, LocalDate.now(), LocalDate.now().plusMonths(3)));
+        Shortner shortner = shortnerRepository.save(new Shortner(null, str, LocalDate.now(), LocalDate.now().plusMonths(3)));
         String hash = hashids.encode(shortner.getId());
         return new Short_with_base(shortner,hash);
     }
