@@ -25,8 +25,9 @@ public class ShortnerService {
 
     public Short_with_base getShortner(String str){
         Shortner shortner = shortnerRepository.save(new Shortner(null, str, LocalDate.now(), LocalDate.now().plusMonths(3)));
-        String hash = hashids.encode(shortner.getId());
-        return new Short_with_base(shortner,hash);
+        StringBuilder hash = new StringBuilder(hashids.encode(shortner.getId()));
+        hash.insert(0,"http://naisha.ly/");
+        return new Short_with_base(shortner,hash.toString());
     }
 
     public url checkShortner(String url){
