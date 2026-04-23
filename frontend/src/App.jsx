@@ -20,7 +20,7 @@ function App() {
     setCopied(false)
 
     try {
-      const response = await fetch('http://localhost:8080/get', {
+      const response = await fetch(import.meta.env.VITE_API_URL + '/get' || 'http://localhost:8080/get', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
