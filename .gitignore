@@ -1,1 +1,5 @@
 .idea/
+.env/
+*.log
+frontend/.env
+backend/.env
