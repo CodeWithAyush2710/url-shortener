@@ -4,10 +4,8 @@ import com.example.url_shortener_backend.Entity.Shortner;
 import com.example.url_shortener_backend.functions.Short_with_base;
 import com.example.url_shortener_backend.functions.url;
 import com.example.url_shortener_backend.Services.ShortnerService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ShortnerController {
@@ -20,9 +18,17 @@ public class ShortnerController {
     public Short_with_base getShortner(@RequestBody url url) {
         return shortnerService.getShortner(url.url());
     }
+    @GetMapping("{shortCode}")
+    public ResponseEntity<Void> redirect(@PathVariable String shortCode) {
+        String originalUrl = shortnerService.getOriginalUrl(shortCode);
 
-    @PostMapping("/check")
-    public url checkShortner(@RequestBody url url) {
-        return shortnerService.checkShortner(url.url());
+        if (originalUrl == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity
+                .status(302) // temporary redirect
+                .header("Location", originalUrl)
+                .build();
     }
 }

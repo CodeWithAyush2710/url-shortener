@@ -24,16 +24,19 @@ public class ShortnerService {
     }
 
     public Short_with_base getShortner(String str){
+        if (!str.startsWith("http://") && !str.startsWith("https://")) {
+            str = "https://" + str;
+        }
         Shortner shortner = shortnerRepository.save(new Shortner(null, str, LocalDate.now(), LocalDate.now().plusMonths(3)));
         StringBuilder hash = new StringBuilder(hashids.encode(shortner.getId()));
         hash.insert(0,"http://naisha.ly/");
         return new Short_with_base(shortner,hash.toString());
     }
 
-    public url checkShortner(String url){
+    public String getOriginalUrl(String url){
         long id = hashids.decode(url)[0];
         Optional<Shortner> shortner = shortnerRepository.findById(id);
 
-        return ((shortner.isPresent()) ? new url(shortner.get().getUser_url()):new url("No url present for this"));
+        return ((shortner.isPresent()) ? shortner.get().getUser_url() : "Url not exists");
     }
 }
